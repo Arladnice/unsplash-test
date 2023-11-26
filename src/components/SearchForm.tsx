@@ -16,12 +16,14 @@ interface ISearchFormProps {
   setSearchValue: Dispatch<SetStateAction<SearchData>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
   setIsEmptyRedults: Dispatch<SetStateAction<boolean>>;
+  setSearchingValue: Dispatch<SetStateAction<string>>;
 }
 
 const SearchForm: FC<ISearchFormProps> = ({
   setSearchValue,
   setLoading,
   setIsEmptyRedults,
+  setSearchingValue,
 }) => {
   const searchInput = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
@@ -33,8 +35,8 @@ const SearchForm: FC<ISearchFormProps> = ({
       setLoading(true);
       setIsEmptyRedults(false);
       const searchValue = searchInput.current.value;
-      const response = await getPhotos(searchValue);
-      const photos = (await response.json()) as SearchData;
+      setSearchingValue(searchValue);
+      const photos = await getPhotos(searchValue, 1);
       if (photos.results.length === 0) {
         setIsEmptyRedults(true);
       } else {

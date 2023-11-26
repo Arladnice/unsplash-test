@@ -1,15 +1,28 @@
 "use client";
+import Loader from "@/components/Loader";
 import SearchForm from "@/components/SearchForm";
 import { SearchData } from "@/lib/types";
+import { getPhotos } from "@/lib/unsplash";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 export default function Home() {
   const [serchValue, setSearchValue] = useState<SearchData>({ results: [] });
   const [loading, setLoading] = useState(false);
   const [isEmptyRedults, setIsEmptyRedults] = useState(false);
-  console.log(serchValue);
+  const [searchingValue, setSearchingValue] = useState("");
+
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      getPhotos(searchingValue, serchValue.results.length + 1).then((res) => {
+        setSearchValue({ results: [...serchValue.results, ...res.results] });
+      });
+    }
+  }, [inView, searchingValue, serchValue.results]);
 
   return (
     <>
@@ -17,6 +30,7 @@ export default function Home() {
         setSearchValue={setSearchValue}
         setLoading={setLoading}
         setIsEmptyRedults={setIsEmptyRedults}
+        setSearchingValue={setSearchingValue}
       />
       <div className="grid md:grid-cols-3 place-items-center gap-4">
         {serchValue.results.map((photo) => (
@@ -38,16 +52,8 @@ export default function Home() {
           К сожалению, поиск не дал результатов
         </div>
       )}
-      {loading && (
-        <div
-          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-          role="status"
-        >
-          <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-            Loading...
-          </span>
-        </div>
-      )}
+      {loading && <Loader />}
+      {serchValue.results.length !== 0 && <div ref={ref} />}
     </>
   );
 }
