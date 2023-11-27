@@ -19,7 +19,5 @@ export const getPhotos = async (value: string, page: number) => {
 };
 
 export const getPhoto = async (id: string) => {
-  return await fetch(`https://api.unsplash.com/photos/${id}`, {
-    headers,
-  });
+  return await fetch(`https://api.unsplash.com/photos/${id}`);
 };
