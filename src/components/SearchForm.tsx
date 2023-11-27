@@ -15,14 +15,14 @@ import removeIcon from "../public/icons/remove.svg";
 interface ISearchFormProps {
   setSearchValue: Dispatch<SetStateAction<SearchData>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  setIsEmptyRedults: Dispatch<SetStateAction<boolean>>;
+  setIsEmptyResults: Dispatch<SetStateAction<boolean>>;
   setSearchingValue: Dispatch<SetStateAction<string>>;
 }
 
 const SearchForm: FC<ISearchFormProps> = ({
   setSearchValue,
   setLoading,
-  setIsEmptyRedults,
+  setIsEmptyResults,
   setSearchingValue,
 }) => {
   const searchInput = useRef<HTMLInputElement>(null);
@@ -33,14 +33,14 @@ const SearchForm: FC<ISearchFormProps> = ({
     if (searchInput.current) {
       setSearchValue({ results: [] });
       setLoading(true);
-      setIsEmptyRedults(false);
+      setIsEmptyResults(false);
       const searchValue = searchInput.current.value;
       setSearchingValue(searchValue);
       const photos = await getPhotos(searchValue, 1);
       if (photos.results.length === 0) {
-        setIsEmptyRedults(true);
+        setIsEmptyResults(true);
       } else {
-        setIsEmptyRedults(false);
+        setIsEmptyResults(false);
       }
       setSearchValue(photos);
       setLoading(false);
@@ -53,10 +53,10 @@ const SearchForm: FC<ISearchFormProps> = ({
 
   return (
     <form
-      className="flex justify-center sm:justify-start py-5"
+      className="flex justify-center xl:justify-start py-5"
       onSubmit={handleSearch}
     >
-      <div className="relative">
+      <div className="relative pr-2">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
             className="w-4 h-4 text-gray-500"
@@ -76,7 +76,7 @@ const SearchForm: FC<ISearchFormProps> = ({
         </div>
         <input
           placeholder="Телефоны, яблоки, груши..."
-          className="py-3 px-2 mr-2 w-[420px] h-[48px] ps-9 rounded-xl bg-input-gray transition-colors focus:bg-input-gray-hover focus:outline-none"
+          className="py-3 px-2 mr-2 w-full min-w-[268px] h-[48px] ps-9 rounded-xl bg-input-gray transition-colors focus:bg-input-gray-hover focus:outline-none"
           ref={searchInput}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
