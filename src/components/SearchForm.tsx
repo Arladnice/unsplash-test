@@ -44,6 +44,7 @@ const SearchForm: FC<ISearchFormProps> = ({
       }
       setSearchValue(photos);
       setLoading(false);
+      searchInput.current.blur();
     }
   };
 
