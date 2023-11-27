@@ -8,6 +8,7 @@ interface ICardProps {
     id: string;
     urls: {
       regular: string;
+      small: string;
     };
     alt_description: string;
   };
@@ -22,15 +23,14 @@ const variants = {
 };
 
 const Card: FC<ICardProps> = ({ photo, index }) => {
-  console.log(photo.id);
-
+  let delay = index;
   return (
     <motion.div
       variants={variants}
       initial="hidden"
       animate="visible"
       transition={{
-        delay: index * 0.1,
+        delay: 0.2,
         ease: "easeInOut",
         duration: 0.5,
       }}
@@ -38,11 +38,13 @@ const Card: FC<ICardProps> = ({ photo, index }) => {
       key={photo.id}
       className="shadow-xl rounded-md"
     >
-      <Link href={`/photo/${photo.id}`} rel="preload" as="image">
+      <Link href={`/photo/${photo.id}`} rel="preload">
         <Image
           src={photo.urls.regular}
           width={600}
           height={600}
+          placeholder="blur"
+          blurDataURL={photo.urls.small}
           alt={photo.alt_description}
           className="h-80 object-cover rounded-md"
         />

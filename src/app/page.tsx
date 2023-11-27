@@ -24,7 +24,6 @@ export default function Home() {
       });
     }
   }, [inView, searchingValue]);
-  console.log(serchValue);
 
   return (
     <>
