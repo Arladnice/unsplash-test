@@ -33,7 +33,7 @@ export default function Home() {
         setIsEmptyResults={setIsEmptyResults}
         setSearchingValue={setSearchingValue}
       />
-      <div className="grid grid-cols-3 place-items-center gap-4 xl:px-0 px-5">
+      <div className="grid grid-cols-3 place-items-center gap-1 xl:gap-4 xl:px-0 px-2">
         {serchValue.results.map((photo, index) => (
           <Card photo={photo} key={photo.id} index={index} />
         ))}
