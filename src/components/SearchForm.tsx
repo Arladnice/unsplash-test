@@ -29,10 +29,9 @@ const SearchForm: FC<ISearchFormProps> = ({
   const [inputValue, setInputValue] = useState("");
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("wtf");
-
     event.preventDefault();
     if (searchInput.current) {
+      searchInput.current.blur();
       setSearchValue({ results: [] });
       setLoading(true);
       setIsEmptyResults(false);
@@ -46,7 +45,6 @@ const SearchForm: FC<ISearchFormProps> = ({
       }
       setSearchValue(photos);
       setLoading(false);
-      searchInput.current.blur();
     }
   };
 
