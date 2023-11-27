@@ -6,16 +6,14 @@ const headers = {
 
 export const getPhotos = async (value: string, page: number) => {
   const url = new URL(
-    `https://api.unsplash.com/search/photos?client_id=Ip0XA55zY7b7-d19osq1L5btGg-YCeDZVpnnJjXqHxs&query=snow&page=${page}`
+    `https://api.unsplash.com/search/photos?client_id=T7nCAf_aVelQVpRStBGzqTEf8seBbeMNuw5_0dcFvRI&query=snow&page=${page}`
   );
 
   url.searchParams.set("per_page", "9");
   url.searchParams.set("order_by", "popular");
   url.searchParams.set("query", value);
 
-  const response = await fetch(url, {
-    headers,
-  });
+  const response = await fetch(url);
 
   return response.json();
 };

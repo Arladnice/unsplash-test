@@ -22,8 +22,7 @@ const variants = {
   visible: { opacity: 1 },
 };
 
-const Card: FC<ICardProps> = ({ photo, index }) => {
-  let delay = index;
+const Card: FC<ICardProps> = ({ photo }) => {
   return (
     <motion.div
       variants={variants}
