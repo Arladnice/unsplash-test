@@ -86,8 +86,8 @@ const SearchForm: FC<ISearchFormProps> = ({
           <div
             className="absolute inset-y-0 end-4 flex items-center cursor-pointer"
             onClick={(e) => {
-              setInputValue("");
               e.preventDefault();
+              setInputValue("");
             }}
           >
             <Image
