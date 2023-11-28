@@ -58,7 +58,7 @@ const SearchForm: FC<ISearchFormProps> = ({
 
   return (
     <form
-      className={`flex justify-center py-5 ${
+      className={`flex py-5 max-[1310px]:justify-center ${
         isFirstLoad ? "xl:py-96" : ""
       } xl:${isFirstLoad ? "jusitify-center" : "justify-start"}`}
       onSubmit={handleSearch}
