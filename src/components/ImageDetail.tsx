@@ -12,8 +12,8 @@ const ImageDetail: FC<ImageDetailProps> = ({ photo }) => {
         placeholder="blur"
         blurDataURL={photo.urls.small}
         src={photo.urls.regular}
-        width={1000}
-        height={600}
+        width={768}
+        height={760}
         alt={photo.alt_description}
         className="object-cover mx-auto"
       />

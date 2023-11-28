@@ -40,12 +40,12 @@ const Card: FC<ICardProps> = ({ photo }) => {
       <Link href={`/photo/${photo.id}`} rel="preload">
         <Image
           src={photo.urls.regular}
-          width={600}
-          height={600}
+          width={204}
+          height={204}
           placeholder="blur"
           blurDataURL={photo.urls.small}
           alt={photo.alt_description}
-          className="h-80 object-cover rounded-md"
+          className="md:h-[204px] md:w-[204px] h-[114px] w-[114px] object-cover rounded-md"
         />
       </Link>
     </motion.div>

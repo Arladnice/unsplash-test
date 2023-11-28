@@ -17,6 +17,7 @@ interface ISearchFormProps {
   setLoading: Dispatch<SetStateAction<boolean>>;
   setIsEmptyResults: Dispatch<SetStateAction<boolean>>;
   setSearchingValue: Dispatch<SetStateAction<string>>;
+  matches: boolean;
 }
 
 const SearchForm: FC<ISearchFormProps> = ({
@@ -24,12 +25,15 @@ const SearchForm: FC<ISearchFormProps> = ({
   setLoading,
   setIsEmptyResults,
   setSearchingValue,
+  matches
 }) => {
   const searchInput = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsFirstLoad(false);
     if (searchInput.current) {
       searchInput.current.blur();
       setSearchValue({ results: [] });
@@ -37,7 +41,7 @@ const SearchForm: FC<ISearchFormProps> = ({
       setIsEmptyResults(false);
       const searchValue = searchInput.current.value;
       setSearchingValue(searchValue);
-      const photos = await getPhotos(searchValue, 1);
+      const photos = await getPhotos(searchValue, 1, matches);
       if (photos.results.length === 0) {
         setIsEmptyResults(true);
       } else {
@@ -54,10 +58,12 @@ const SearchForm: FC<ISearchFormProps> = ({
 
   return (
     <form
-      className="flex justify-center xl:justify-start py-5"
+      className={`flex justify-center py-5 ${
+        isFirstLoad ? "xl:py-96" : ""
+      } xl:${isFirstLoad ? "jusitify-center" : "justify-start"}`}
       onSubmit={handleSearch}
     >
-      <div className="relative pr-2">
+      <div className="relative mr-2 md:w-[420px] w-[268px]">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
             className="w-4 h-4 text-gray-500"

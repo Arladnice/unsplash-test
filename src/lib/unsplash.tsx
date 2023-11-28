@@ -4,12 +4,20 @@ const headers = {
   Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`,
 };
 
-export const getPhotos = async (value: string, page: number) => {
+export const getPhotos = async (
+  value: string,
+  page: number,
+  matches: boolean
+) => {
   const url = new URL(
     `https://api.unsplash.com/search/photos?client_id=T7nCAf_aVelQVpRStBGzqTEf8seBbeMNuw5_0dcFvRI&query=snow&page=${page}`
   );
 
-  url.searchParams.set("per_page", "9");
+  if (!matches) {
+    url.searchParams.set("per_page", "30");
+  } else {
+    url.searchParams.set("per_page", "12");
+  }
   url.searchParams.set("order_by", "popular");
   url.searchParams.set("query", value);
 

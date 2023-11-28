@@ -2,6 +2,7 @@
 import Card from "@/components/Card";
 import Loader from "@/components/Loader";
 import SearchForm from "@/components/SearchForm";
+import { useMediaQuery } from "@/lib/mediaQuery";
 import { SearchData } from "@/lib/types";
 import { getPhotos } from "@/lib/unsplash";
 import { useEffect, useState } from "react";
@@ -14,14 +15,18 @@ export default function Home() {
   const [searchingValue, setSearchingValue] = useState("");
 
   const { ref, inView } = useInView();
+  const matches = useMediaQuery(1024);
+  console.log("matches", matches);
 
   useEffect(() => {
     if (inView) {
       setLoading(true);
-      getPhotos(searchingValue, serchValue.results.length + 1).then((res) => {
-        setSearchValue({ results: [...serchValue.results, ...res.results] });
-        setLoading(false);
-      });
+      getPhotos(searchingValue, serchValue.results.length + 1, matches).then(
+        (res) => {
+          setSearchValue({ results: [...serchValue.results, ...res.results] });
+          setLoading(false);
+        }
+      );
     }
   }, [inView, searchingValue]);
 
@@ -32,8 +37,9 @@ export default function Home() {
         setLoading={setLoading}
         setIsEmptyResults={setIsEmptyResults}
         setSearchingValue={setSearchingValue}
+        matches={matches}
       />
-      <div className="grid grid-cols-3 place-items-center gap-1 xl:gap-4 xl:px-0 px-2">
+      <div className="grid grid-cols-3 place-items-center gap-1 xl:gap-4 xl:px-0 px-2 lg:grid-cols-6 md:grid-cols-5">
         {serchValue.results.map((photo, index) => (
           <Card photo={photo} key={photo.id} index={index} />
         ))}
