@@ -16,7 +16,7 @@ export const getPhotos = async (
   if (!matches) {
     url.searchParams.set("per_page", "30");
   } else {
-    url.searchParams.set("per_page", "18");
+    url.searchParams.set("per_page", "12");
   }
   url.searchParams.set("order_by", "popular");
   url.searchParams.set("query", value);

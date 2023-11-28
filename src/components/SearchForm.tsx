@@ -25,7 +25,7 @@ const SearchForm: FC<ISearchFormProps> = ({
   setLoading,
   setIsEmptyResults,
   setSearchingValue,
-  matches
+  matches,
 }) => {
   const searchInput = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
