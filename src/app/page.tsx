@@ -15,7 +15,7 @@ export default function Home() {
   const [searchingValue, setSearchingValue] = useState("");
 
   const { ref, inView } = useInView();
-  const matches = useMediaQuery(1024);
+  const matches = useMediaQuery(1025);
   console.log("matches", matches);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Home() {
         setSearchingValue={setSearchingValue}
         matches={matches}
       />
-      <div className="grid grid-cols-3 place-items-center gap-1 xl:gap-4 xl:px-0 px-2 lg:grid-cols-6 md:grid-cols-5">
+      <div className="grid grid-cols-3 place-items-center gap-1 xl:gap-4 xl:px-0 px-2 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4">
         {serchValue.results.map((photo, index) => (
           <Card photo={photo} key={photo.id} index={index} />
         ))}
