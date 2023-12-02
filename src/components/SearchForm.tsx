@@ -58,9 +58,9 @@ const SearchForm: FC<ISearchFormProps> = ({
 
   return (
     <form
-      className={`flex justify-center py-5 ${
-        isFirstLoad ? "xl:py-96 xl:jusitify-center" : "xl:justify-start"
-      }`}
+      className={`flex ${
+        isFirstLoad ? "justify-center" : "justify-start"
+      } py-5 px-4`}
       onSubmit={handleSearch}
     >
       <div className="relative mr-2 md:w-[420px] w-[268px]">
@@ -83,7 +83,7 @@ const SearchForm: FC<ISearchFormProps> = ({
         </div>
         <input
           placeholder="Apple, games, space..."
-          className="py-3 px-2 mr-2 w-full min-w-[268px] h-[48px] ps-9 rounded-xl bg-input-gray transition-colors focus:bg-input-gray-hover focus:outline-none"
+          className="py-3 px-2 mr-2 w-full h-[48px] ps-9 rounded-xl bg-input-gray transition-colors focus:bg-input-gray-hover focus:outline-none"
           ref={searchInput}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}

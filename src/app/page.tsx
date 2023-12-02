@@ -39,14 +39,16 @@ export default function Home() {
         setSearchingValue={setSearchingValue}
         matches={matches}
       />
-      <div className="grid grid-cols-3 place-items-center gap-1 xl:gap-4 xl:px-0 px-2 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4">
-        {serchValue.results.map((photo, index) => (
-          <Card photo={photo} key={photo.id} index={index} />
-        ))}
-      </div>
+      {serchValue.results.length !== 0 && (
+        <div className="px-4 grid grid-cols-3 place-items-center gap-1 xl:gap-4 lg:grid-cols-6 min-[520px]:grid-cols-5 min-[400px]:grid-cols-4 min-[380px]:grid-cols-3">
+          {serchValue.results.map((photo, index) => (
+            <Card photo={photo} key={photo.id} index={index} />
+          ))}
+        </div>
+      )}
       {loading && <Loader />}
       {isEmptyResults && (
-        <div className="text-no-results text-base xl:px-0 px-5">
+        <div className="text-no-results text-base px-4 h-screen">
           К сожалению, поиск не дал результатов
         </div>
       )}

@@ -35,7 +35,7 @@ const Card: FC<ICardProps> = ({ photo }) => {
       }}
       viewport={{ amount: 0 }}
       key={photo.id}
-      className="shadow-xl rounded-md"
+      className="border-solid border border-[#EBEBEB] rounded"
     >
       <Link href={`/photo/${photo.id}`} rel="preload">
         <Image
@@ -45,7 +45,7 @@ const Card: FC<ICardProps> = ({ photo }) => {
           placeholder="blur"
           blurDataURL={photo.urls.small}
           alt={photo.alt_description}
-          className="md:h-[204px] md:w-[204px] h-[114px] w-[114px] object-cover rounded-md"
+          className="min-[620px]:h-[204px] min-[620px]:w-[204px] h-[114px] w-[114px] object-cover rounded-md"
         />
       </Link>
     </motion.div>

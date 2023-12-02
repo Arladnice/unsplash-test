@@ -15,7 +15,7 @@ const ModalDetailPage: FC<ModalDetailPageProps> = async ({ params }) => {
 
   return (
     <div className="fixed inset-0 bg-zinc-900/20 z-10">
-      <div className="flex items-center h-full max-w-3xl mx-auto">
+      <div className="flex max-[450px]:items-start items-center h-full max-w-3xl mx-auto">
         <div className="w-full">
           <ButtonCloseModal />
           <ImageDetail photo={photo} />
