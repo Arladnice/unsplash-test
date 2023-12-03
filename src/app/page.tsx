@@ -13,10 +13,10 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [isEmptyResults, setIsEmptyResults] = useState(false);
   const [searchingValue, setSearchingValue] = useState("");
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   const { ref, inView } = useInView();
   const matches = useMediaQuery(1025);
-  console.log("matches", matches);
 
   useEffect(() => {
     if (inView) {
@@ -31,13 +31,19 @@ export default function Home() {
   }, [inView, searchingValue]);
 
   return (
-    <>
+    <div
+      className={`grid grid-cols-1 max-w-7xl mx-auto items-center ${
+        isFirstLoad ? "h-screen" : ""
+      }`}
+    >
       <SearchForm
         setSearchValue={setSearchValue}
         setLoading={setLoading}
         setIsEmptyResults={setIsEmptyResults}
         setSearchingValue={setSearchingValue}
         matches={matches}
+        isFirstLoad={isFirstLoad}
+        setIsFirstLoad={setIsFirstLoad}
       />
       {serchValue.results.length !== 0 && (
         <div className="px-4 grid grid-cols-3 place-items-center gap-1 xl:gap-4 lg:grid-cols-6 min-[520px]:grid-cols-5 min-[400px]:grid-cols-4 min-[380px]:grid-cols-3">
@@ -53,6 +59,6 @@ export default function Home() {
         </div>
       )}
       {serchValue.results.length !== 0 && <div ref={ref} />}
-    </>
+    </div>
   );
 }

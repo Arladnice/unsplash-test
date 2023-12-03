@@ -17,7 +17,9 @@ interface ISearchFormProps {
   setLoading: Dispatch<SetStateAction<boolean>>;
   setIsEmptyResults: Dispatch<SetStateAction<boolean>>;
   setSearchingValue: Dispatch<SetStateAction<string>>;
+  setIsFirstLoad: Dispatch<SetStateAction<boolean>>;
   matches: boolean;
+  isFirstLoad: boolean;
 }
 
 const SearchForm: FC<ISearchFormProps> = ({
@@ -26,10 +28,11 @@ const SearchForm: FC<ISearchFormProps> = ({
   setIsEmptyResults,
   setSearchingValue,
   matches,
+  setIsFirstLoad,
+  isFirstLoad,
 }) => {
   const searchInput = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -21,9 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={myFont.className}>
-        <main className="grid grid-cols-1 max-w-7xl mx-auto items-center h-screen">
-          {children}
-        </main>
+        <main>{children}</main>
         {modal}
       </body>
     </html>
